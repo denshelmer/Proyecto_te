@@ -1,0 +1,38 @@
+services:
+  plataforma-dashboard:
+    build: ./ml-engine
+    container_name: te_plataforma_streamlit
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./ml-engine:/app
+    depends_on:
+      - backend
+
+  backend:
+    image: node:18-alpine
+    container_name: te_backend_api
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    ports:
+      - "4000:4000"
+    command: sh -c "npm install && npm start"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    container_name: te_postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: microemprendimientos_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d
+
+volumes:
+  pg_data:
