@@ -495,7 +495,7 @@ if analizar:
             color_riesgo = "#ef4444"
         elif prediccion == 1:
             nivel_riesgo = "MEDIO"
-            badge_class  = "badge-medio"
+            badge_class  = "badge-medio" 
             color_riesgo = "#f59e0b"
         else:
             nivel_riesgo = "BAJO"
