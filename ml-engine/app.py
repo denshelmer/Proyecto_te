@@ -299,15 +299,20 @@ if analizar:
     punto_equilibrio = total_costos  # Ingresos mínimos para no perder
 
    # ── Nivel de riesgo financiero con MACHINE LEARNING ─────────────────────
+    # ── Nivel de riesgo financiero con MACHINE LEARNING ─────────────────────
     import joblib
     import os
+    import pandas as pd
 
     try:
-        # Cargar el modelo de IA real
-        modelo_ia = joblib.load('modelo_riesgo.pkl')
+        # 1. Cargar el modelo definitivo que aprendió del Excel
+        modelo_ia = joblib.load('modelo_riesgo_definitivo.pkl')
         
-        # Hacer la predicción matemática
-        prediccion = modelo_ia.predict([[ingresos, total_costos]])[0]
+        # 2. Empaquetar los datos EXACTAMENTE como los leyó la IA al entrenar
+        datos_entrada = pd.DataFrame([[ingresos, total_costos]], columns=['Sales', 'COGS'])
+        
+        # 3. Hacer la predicción matemática
+        prediccion = modelo_ia.predict(datos_entrada)[0]
         
         if prediccion == 2:
             nivel_riesgo = "ALTO"
@@ -323,7 +328,7 @@ if analizar:
             color_riesgo = "#22c55e"
             
     except Exception as e:
-        st.warning("⚠️ Modelo IA no encontrado. Ejecuta 'python entrenar_modelo.py' primero.")
+        st.warning(f"⚠️ Error cargando la IA: {e}")
         nivel_riesgo = "DESCONOCIDO"
         badge_class  = "badge-medio"
         color_riesgo = "#6c63ff"
