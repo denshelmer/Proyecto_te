@@ -16,5 +16,11 @@ CREATE TABLE registros_financieros (
     fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Insertamos un usuario demo (ID 1) para que el endpoint de tu API tenga a quién asignarle los datos
-INSERT INTO usuarios (nombre, email) VALUES ('Emprendedor Demo', 'demo@empresa.com');
+-- Usuario demo con contraseña: demo123
+-- Hash bcrypt generado con 10 rondas de salt
+INSERT INTO usuarios (nombre, email, password_hash)
+VALUES (
+    'Emprendedor Demo',
+    'demo@empresa.com',
+    '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy'
+);

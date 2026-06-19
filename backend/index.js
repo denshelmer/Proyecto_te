@@ -94,4 +94,4 @@ app.post('/api/registros', verificarToken, async (req, res) => {
     }
 });
 
-app.listen(4000, () => console.log('API Backend segura corriendo en puerto 4000'));
+app.listen(4000, () => console.log('[API] Backend corriendo en puerto 4000'));

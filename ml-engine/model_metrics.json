@@ -1,0 +1,8 @@
+{
+  "accuracy": 92.2,
+  "f1_score": 91.94,
+  "train_samples": 563,
+  "test_samples": 141,
+  "total_samples": 704,
+  "n_estimators": 100
+}
