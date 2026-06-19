@@ -320,7 +320,7 @@ if analizar:
             color_riesgo = "#ef4444"
         elif prediccion == 1:
             nivel_riesgo = "MEDIO"
-            badge_class  = "badge-medio"
+            badge_class  = "badge-medio" 
             color_riesgo = "#f59e0b"
         else:
             nivel_riesgo = "BAJO"
@@ -587,22 +587,27 @@ if analizar:
 
 
 
-    # Añade esto justo después de calcular el nivel_riesgo (ALTO, MEDIO, BAJO)
-    import requests
-    
+# ─────────────────────────────────────────────────────────────────────
+    # REEMPLAZO DE LA API POR EL CSV LOCAL (CONTINGENCIA)
+    # ─────────────────────────────────────────────────────────────────────
+    import csv
+    import os
+    from datetime import datetime
+
     try:
-        payload = {
-            "ingresos": ingresos,
-            "costos_fijos": costos_fijos,
-            "costos_variables": costos_variables,
-            "riesgo": nivel_riesgo
-        }
-        # Enviar datos a tu API de Node.js
-        res = requests.post("http://backend:4000/api/registros", json=payload)
-        if res.status_code == 201:
-            st.toast('✅ Datos guardados en PostgreSQL exitosamente', icon='💾')
+        archivo_db = 'base_auditoria.csv'
+        
+        if not os.path.exists(archivo_db):
+            with open(archivo_db, 'w', newline='', encoding='utf-8') as f:
+                csv.writer(f).writerow(['Fecha', 'Ingresos', 'Costos Fijos', 'Costos Variables', 'Riesgo Predicho', 'Estado Real'])
+
+        nuevo_registro = [datetime.now().strftime("%Y-%m-%d %H:%M:%S"), ingresos, costos_fijos, costos_variables, nivel_riesgo, "Pendiente"]
+        with open(archivo_db, 'a', newline='', encoding='utf-8') as f:
+            csv.writer(f).writerow(nuevo_registro)
+            
+        st.toast('✅ Registro guardado en el sistema de auditoría local', icon='💾')
     except Exception as e:
-        st.toast('⚠️ Modo local: API backend no conectada', icon='🔌')
+        st.toast(f'⚠️ Error al guardar: {e}', icon='🔌')
 
     # ─────────────────────────────────────────────────────────────────────
     # RESUMEN EJECUTIVO
@@ -633,7 +638,6 @@ if analizar:
         | Eficiencia vs. histórico | {eficiencia_vs_hist:+.1f}% |
         | Empresas similares en dataset | {len(df_similar):,} |
         """)
-
 # ─────────────────────────────────────────────────────────────────────────────
 # ESTADO INICIAL (antes de pulsar Analizar)
 # ─────────────────────────────────────────────────────────────────────────────

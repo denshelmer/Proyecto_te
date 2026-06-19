@@ -18,7 +18,7 @@ cols_numericas = ["Sales", "COGS", "Profit"]
 # Verificar que las columnas existan antes de limpiar
 for col in cols_numericas:
     if col not in df.columns:
-        print(f"❌ ERROR CRÍTICO: No existe la columna '{col}' en tu Excel.")
+        print(f" ERROR CRÍTICO: No existe la columna '{col}' en tu Excel.")
         exit()
 
 for col in cols_numericas:
@@ -56,7 +56,7 @@ df['Etiqueta_Riesgo'] = df.apply(clasificar_riesgo, axis=1)
 X = df[['Sales', 'COGS']]
 y = df['Etiqueta_Riesgo']
 
-print(f"🧠 Entrenando el algoritmo Random Forest con {len(df)} registros reales...")
+print(f" Entrenando el algoritmo Random Forest con {len(df)} registros reales...")
 
 # 5. Entrenar el modelo
 modelo = RandomForestClassifier(n_estimators=100, random_state=42)
@@ -64,4 +64,4 @@ modelo.fit(X, y)
 
 # 6. Guardar el "cerebro" ya entrenado
 joblib.dump(modelo, 'modelo_riesgo_definitivo.pkl')
-print("✅ ¡Modelo entrenado con éxito! Guardado como 'modelo_riesgo_definitivo.pkl'")
+print(" ¡Modelo entrenado con éxito! Guardado como 'modelo_riesgo_definitivo.pkl'")
