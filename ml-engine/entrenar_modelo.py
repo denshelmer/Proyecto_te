@@ -20,11 +20,7 @@ cols_numericas = ["Sales", "COGS", "Profit"]
 
 for col in cols_numericas:
     if col not in df.columns:
-<<<<<<< HEAD
         print(f"ERROR CRITICO: No existe la columna '{col}' en el Excel.")
-=======
-        print(f" ERROR CRÍTICO: No existe la columna '{col}' en tu Excel.")
->>>>>>> d35061edc0bb5933d4a57369e8b61f2d1e921b5b
         exit()
 
 for col in cols_numericas:
@@ -61,12 +57,9 @@ df['Etiqueta_Riesgo'] = df.apply(clasificar_riesgo, axis=1)
 X = df[['Sales', 'COGS']]
 y = df['Etiqueta_Riesgo']
 
-<<<<<<< HEAD
 # 5. Division train/test
 print("Dividiendo dataset: 80% entrenamiento / 20% prueba...")
-=======
-print(f" Entrenando el algoritmo Random Forest con {len(df)} registros reales...")
->>>>>>> d35061edc0bb5933d4a57369e8b61f2d1e921b5b
+print(f"Entrenando el algoritmo Random Forest con {len(df)} registros reales...")
 
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.20, random_state=42, stratify=y
@@ -118,9 +111,5 @@ modelo = RandomForestClassifier(n_estimators=100, random_state=42)
 modelo.fit(X, y)
 
 joblib.dump(modelo, 'modelo_riesgo_definitivo.pkl')
-<<<<<<< HEAD
 print("Modelo guardado como modelo_riesgo_definitivo.pkl")
-print("Proceso completado.")
-=======
-print(" ¡Modelo entrenado con éxito! Guardado como 'modelo_riesgo_definitivo.pkl'")
->>>>>>> d35061edc0bb5933d4a57369e8b61f2d1e921b5b
+print("Proceso completado exitosamente.")

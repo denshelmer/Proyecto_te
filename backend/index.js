@@ -8,12 +8,17 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Secreto para firmar los tokens (en producción esto va en variables de entorno)
-const JWT_SECRET = "super_secreto_tecnologias_emergentes";
+// Secreto JWT — leído desde variable de entorno (definida en docker-compose.yml)
+const JWT_SECRET = process.env.JWT_SECRET || "super_secreto_tecnologias_emergentes";
 
 const pool = new Pool({
-    connectionString: 'postgres://postgres:root@db:5432/microemprendimientos_db'
+    connectionString: process.env.DATABASE_URL || 'postgres://postgres:root@db:5432/microemprendimientos_db'
 });
+
+// ==========================================
+// HEALTH CHECK — requerido por docker-compose
+// ==========================================
+app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
 // ==========================================
 // 1. ENDPOINT: Registro de Usuario
