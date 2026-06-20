@@ -1,4 +1,4 @@
-# 📊 Plataforma Cloud de Análisis de Microemprendimientos
+# Plataforma Cloud de Análisis de Microemprendimientos
 
 > **API REST + Machine Learning + Big Data Pipeline** — Proyecto de Tecnologías Emergentes
 
@@ -6,11 +6,11 @@ Sistema de análisis de sostenibilidad económica para microemprendimientos medi
 
 ---
 
-## 🗂️ Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 Proyecto_te/
-├── fastapi-api/           # ← API REST FastAPI (nuevo servicio)
+├── fastapi-api/           # API REST FastAPI (nuevo servicio)
 │   ├── app.py             #   Código principal de la API
 │   ├── requirements.txt   #   Dependencias Python
 │   └── Dockerfile         #   Imagen Docker del servicio
@@ -29,27 +29,27 @@ Proyecto_te/
 
 ---
 
-## 🏗️ Diagrama de Arquitectura
+## Diagrama de Arquitectura
 
 ```mermaid
 graph TD
-    U["👤 Usuario / Cliente"]
-    
+    U["Usuario / Cliente"]
+
     subgraph "Capa de Presentación"
-        ST["🖥️ Dashboard Streamlit<br/>Puerto 8501"]
+        ST["Dashboard Streamlit<br/>Puerto 8501"]
     end
 
     subgraph "Capa de API"
-        FA["🚀 FastAPI — Big Data API<br/>Puerto 8000<br/>POST /api/data/ingest<br/>POST /api/data/process<br/>GET /api/data/results"]
-        ND["⚙️ Node.js / Express — Auth API<br/>Puerto 4000<br/>POST /api/auth/login<br/>POST /api/auth/registro<br/>POST /api/registros"]
+        FA["FastAPI — Big Data API<br/>Puerto 8000<br/>POST /api/data/ingest<br/>POST /api/data/process<br/>GET /api/data/results"]
+        ND["Node.js / Express — Auth API<br/>Puerto 4000<br/>POST /api/auth/login<br/>POST /api/auth/registro<br/>POST /api/registros"]
     end
 
     subgraph "Capa de ML"
-        ML["🤖 Random Forest<br/>modelo_riesgo_definitivo.pkl<br/>Accuracy: 92.2%"]
+        ML["Random Forest<br/>modelo_riesgo_definitivo.pkl<br/>Accuracy: 92.2%"]
     end
-    
+
     subgraph "Capa de Datos"
-        DB[("🐘 PostgreSQL<br/>Puerto 5432<br/>usuarios<br/>registros_financieros<br/>api_data_ingest<br/>api_data_processed")]
+        DB[("PostgreSQL<br/>Puerto 5432<br/>usuarios<br/>registros_financieros<br/>api_data_ingest<br/>api_data_processed")]
     end
 
     U -->|"GET/POST HTTP"| FA
@@ -64,7 +64,7 @@ graph TD
 
 ---
 
-## 🚀 Instalación y Ejecución
+## Instalación y Ejecución
 
 ### Prerrequisitos
 - Docker Desktop instalado y ejecutándose
@@ -94,9 +94,9 @@ docker compose ps
 
 ---
 
-## 📡 Endpoints de la API FastAPI
+## Endpoints de la API FastAPI
 
-### 🏥 Health
+### Health
 | Método | Endpoint | Descripción |
 | :--- | :--- | :--- |
 | `GET` | `/` | Estado del servidor y mapa de endpoints |
@@ -123,7 +123,7 @@ docker compose ps
 **Respuesta (201 Created):**
 ```json
 {
-  "mensaje": "✅ Registro ingestado exitosamente",
+  "mensaje": "Registro ingestado exitosamente",
   "id": 1,
   "creado_en": "2026-06-19T23:15:00.000Z",
   "estado": "pendiente",
@@ -144,7 +144,7 @@ docker compose ps
 **Respuesta (200 OK):**
 ```json
 {
-  "mensaje": "✅ 1 registros procesados con éxito",
+  "mensaje": "1 registros procesados con exito",
   "procesados": 1,
   "latencia_ms": 38.7,
   "resultados": [
@@ -201,7 +201,7 @@ docker compose ps
 
 ---
 
-## 📊 Reporte de Métricas
+## Reporte de Métricas
 
 ### Métricas del Modelo de Machine Learning
 
@@ -242,7 +242,7 @@ docker compose ps
 
 ---
 
-## 📷 Capturas del API Funcionando
+## Capturas del API Funcionando
 
 ### Swagger UI — Documentación Interactiva (`http://localhost:8000/docs`)
 
@@ -256,14 +256,14 @@ docker compose ps
 
 ---
 
-### ✅ Resultados verificados de ejecución
+### Resultados verificados de ejecución
 
 **1. `GET /` — Health Check**
 ```json
 {
-  "api": "Análisis de Microemprendimientos — Big Data / ML",
+  "api": "Analisis de Microemprendimientos — Big Data / ML",
   "version": "1.0.0",
-  "status": "✅ Activo",
+  "status": "Activo",
   "docs": "/docs",
   "endpoints": {
     "ingestión_json": "POST /api/data/ingest",
@@ -279,7 +279,7 @@ docker compose ps
 **2. `POST /api/data/ingest` — Ingestión JSON individual**
 ```json
 {
-  "mensaje": "✅ Registro ingestado exitosamente",
+  "mensaje": "Registro ingestado exitosamente",
   "id": 1,
   "creado_en": "2026-06-19T23:14:38.808175",
   "estado": "pendiente",
@@ -290,7 +290,7 @@ docker compose ps
 **3. `POST /api/data/ingest/batch` — Ingestión en lote (5 registros)**
 ```json
 {
-  "mensaje": "✅ 5 registros ingestados",
+  "mensaje": "5 registros ingestados",
   "ids": [2, 3, 4, 5, 6],
   "estado": "pendiente",
   "latencia_ms": 8.72
@@ -300,15 +300,15 @@ docker compose ps
 **4. `POST /api/data/process` — ETL + Predicción ML (6 registros)**
 ```json
 {
-  "mensaje": "✅ 6 registros procesados con éxito",
+  "mensaje": "6 registros procesados con exito",
   "procesados": 6,
   "latencia_ms": 640.16,
   "resultados": [
-    { "processed_id": 1, "ingest_id": 1, "ingresos": 15000.0, "total_costos": 9000.0, "saldo_neto": 6000.0, "margen_utilidad_pct": 40.0, "nivel_riesgo": "BAJO" },
-    { "processed_id": 2, "ingest_id": 2, "ingresos": 8000.0,  "total_costos": 9000.0, "saldo_neto": -1000.0, "margen_utilidad_pct": -12.5, "nivel_riesgo": "MEDIO" },
-    { "processed_id": 3, "ingest_id": 3, "ingresos": 25000.0, "total_costos": 6000.0, "saldo_neto": 19000.0, "margen_utilidad_pct": 76.0, "nivel_riesgo": "BAJO" },
-    { "processed_id": 4, "ingest_id": 4, "ingresos": 5000.0,  "total_costos": 9000.0, "saldo_neto": -4000.0, "margen_utilidad_pct": -80.0, "nivel_riesgo": "MEDIO" },
-    { "processed_id": 5, "ingest_id": 5, "ingresos": 50000.0, "total_costos": 13000.0,"saldo_neto": 37000.0, "margen_utilidad_pct": 74.0, "nivel_riesgo": "BAJO" },
+    { "processed_id": 1, "ingest_id": 1, "ingresos": 15000.0, "total_costos": 9000.0, "saldo_neto": 6000.0, "margen_utilidad_pct": 40.0,    "nivel_riesgo": "BAJO" },
+    { "processed_id": 2, "ingest_id": 2, "ingresos": 8000.0,  "total_costos": 9000.0, "saldo_neto": -1000.0, "margen_utilidad_pct": -12.5,  "nivel_riesgo": "MEDIO" },
+    { "processed_id": 3, "ingest_id": 3, "ingresos": 25000.0, "total_costos": 6000.0, "saldo_neto": 19000.0, "margen_utilidad_pct": 76.0,   "nivel_riesgo": "BAJO" },
+    { "processed_id": 4, "ingest_id": 4, "ingresos": 5000.0,  "total_costos": 9000.0, "saldo_neto": -4000.0, "margen_utilidad_pct": -80.0,  "nivel_riesgo": "MEDIO" },
+    { "processed_id": 5, "ingest_id": 5, "ingresos": 50000.0, "total_costos": 13000.0,"saldo_neto": 37000.0, "margen_utilidad_pct": 74.0,   "nivel_riesgo": "BAJO" },
     { "processed_id": 6, "ingest_id": 6, "ingresos": 3000.0,  "total_costos": 7000.0, "saldo_neto": -4000.0, "margen_utilidad_pct": -133.33,"nivel_riesgo": "MEDIO" }
   ]
 }
@@ -336,7 +336,7 @@ docker compose ps
 
 ---
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnológico
 
 | Componente | Tecnología | Versión |
 | :--- | :--- | :--- |
@@ -346,37 +346,37 @@ docker compose ps
 | **Base de datos** | PostgreSQL | 15 Alpine |
 | **ORM/Driver** | psycopg2-binary | 2.9.9 |
 | **Procesamiento de datos** | Pandas | 2.2.2 |
-| **Dashboard** | Streamlit + Plotly | ≥1.32.0 / ≥5.18.0 |
+| **Dashboard** | Streamlit + Plotly | 1.32.0 / 5.18.0 |
 | **Auth API** | Node.js + Express + JWT | 18 LTS |
 | **Containerización** | Docker + Docker Compose | 29.1.3 |
 
 ---
 
-## 📋 Flujo de Datos Completo (Big Data Pipeline)
+## Flujo de Datos Completo (Big Data Pipeline)
 
 ```
 [Fuente de Datos]
    JSON / CSV / Batch
-         │
-         ▼
-[1. INGESTIÓN — POST /api/data/ingest]
+         |
+         v
+[1. INGESTION — POST /api/data/ingest]
    Validación Pydantic
-   INSERT api_data_ingest → procesado = FALSE
-         │
-         ▼
+   INSERT api_data_ingest -> procesado = FALSE
+         |
+         v
 [2. PROCESAMIENTO — POST /api/data/process]
    Extracción: SELECT WHERE procesado = FALSE
    Transformación ETL:
-     → total_costos = costos_fijos + costos_variables
-     → saldo_neto = ingresos - total_costos
-     → margen_utilidad = (saldo_neto / ingresos) * 100
-     → punto_equilibrio = total_costos
+     -> total_costos = costos_fijos + costos_variables
+     -> saldo_neto = ingresos - total_costos
+     -> margen_utilidad = (saldo_neto / ingresos) * 100
+     -> punto_equilibrio = total_costos
    Predicción ML (Random Forest .pkl):
-     → nivel_riesgo: BAJO | MEDIO | ALTO
+     -> nivel_riesgo: BAJO | MEDIO | ALTO
    Carga: INSERT api_data_processed
           UPDATE api_data_ingest SET procesado = TRUE
-         │
-         ▼
+         |
+         v
 [3. DESPLIEGUE — GET /api/data/results]
    JOIN api_data_processed + api_data_ingest
    Filtros opcionales por nivel_riesgo
