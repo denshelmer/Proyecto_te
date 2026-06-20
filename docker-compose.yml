@@ -21,6 +21,20 @@ services:
     depends_on:
       - db
 
+  fastapi-api:
+    build: ./fastapi-api
+    container_name: te_fastapi_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./fastapi-api:/app
+      - ./ml-engine/modelo_riesgo_definitivo.pkl:/model/modelo_riesgo_definitivo.pkl:ro
+    environment:
+      - DATABASE_URL=postgres://postgres:root@db:5432/microemprendimientos_db
+      - MODEL_PATH=/model/modelo_riesgo_definitivo.pkl
+    depends_on:
+      - db
+
   db:
     image: postgres:15-alpine
     container_name: te_postgres_db
@@ -35,4 +49,4 @@ services:
       - ./db-init:/docker-entrypoint-initdb.d
 
 volumes:
-  pg_data:
+  pg_data:
